@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Splicr</title>
+
+    {% include "includes.html" %}
+
+  </head>
+  <body>
+    {% include "navbar.html" %}
+
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+        <div id="ytplayer"></div>
+        <script>
+          // Load the IFrame Player API code asynchronously.
+          var tag = document.createElement('script');
+          tag.src = "https://www.youtube.com/player_api";
+          var firstScriptTag = document.getElementsByTagName('script')[0];
+          firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+          // Replace the 'ytplayer' element with an <iframe> and
+          // YouTube player after the API code downloads.
+            var player;
+            function onYouTubePlayerAPIReady() {
+            player = new YT.Player('ytplayer', {
+            height: '350',
+            width: '640',
+            videoId: '{{ ytid }}',
+            playerVars : {
+            autoplay: 1,
+            showinfo: 0,
+            modestbranding: 1
+            }
+            });
+            }
+        
+        </script>
+      </div>
+      
+      <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+      <!-- Simple Track Presentation -->
+      <h2>{{ track.title }}</h2>
+      <h3>{{ track.artist }}</h3>
+      </div>
+    </div>
+
+  </body>
+</html>

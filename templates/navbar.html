@@ -1,0 +1,22 @@
+<nav class="navbar navbar-static-top">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Splicr</a>
+    </div>
+    <form class="navbar-form navbar-right" id="search" onsubmit="return redirect()">
+      <!--<div class="form-group">-->
+        <input type="text" class="form-control" placeholder="Album" autofocus placeholder="Album" name="terms" id="terms">
+        <button type="submit" value="Submit" class="btn btn-default">Search</button>
+      <!--</div> -->
+    </form>
+        
+  </div><!-- /.container-fluid -->
+</nav>
+
+<script>
+  function redirect() {
+  window.location.replace(window.location.href + "search/" + encodeURIComponent($("#search :input[id=terms]").val()));
+  return false;
+  }
+</script>
