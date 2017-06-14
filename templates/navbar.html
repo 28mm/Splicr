@@ -14,9 +14,12 @@
   </div><!-- /.container-fluid -->
 </nav>
 
+
 <script>
   function redirect() {
-  window.location.replace(window.location.href + "search/" + encodeURIComponent($("#search :input[id=terms]").val()));
-  return false;
+      window.location.assign(
+            "/search/"
+          + encodeURIComponent($("#search :input[id=terms]").val())); 
+      return false;
   }
 </script>

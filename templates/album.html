@@ -14,6 +14,7 @@
       <div id="ytplayer"></div>
       
       <script>
+	
         // Keep track of which track we're playing.
         var nowPlaying = 1;
         var lastTrack   = {{album.tracks|length}};
@@ -46,12 +47,42 @@
         // Move to the next track.
         function onPlayerStateChange(event) {
             if (event.data == 0) {
-                player.loadVideoById('XvDZLjaCJuw');
+	        if (nowPlaying >= lastTrack) {
+	            return False;
+	        }
+	        else {
+	            play(next());
+                    //player.loadVideoById('XvDZLjaCJuw');
+                }
             }
-        }
+	}
 
-        // Async grab ytid from track uuid.
-        
+        function next() {
+            return nowPlaying + 1;
+	}
+
+	function prev() {
+            return nowPlaying - 1;
+	}
+	
+        function play(track) {
+	    elt  = $('a[idx=' + track + ']');
+            uuid = elt.attr('uuid');
+	    ytid = elt.attr('ytid');
+            if (!ytid) {
+	
+               $.ajax({ 'async' : false,
+	                'url'   : "/ytid/" + uuid,
+	                'type'  : 'GET',
+	                'success' :
+	                    function(data) {
+                                elt.attr('ytid', data);
+	                        
+	         }});
+             }
+	     player.loadVideoById(elt.attr('ytid'));
+	     nowPlaying = track;
+	}
 
       </script>
       </div>
@@ -61,7 +92,7 @@
       <h2>{{ album.title }}</h2>
       <ol>
         {% for track in album.tracks %}
-        <li><a href="/track/{{track.uuid}}" id={{track.uuid}} idx="{{loop.index}}">{{track.title}}</a></li>
+        <li><a uuid="{{track.uuid}}" ytid="" onclick="play({{loop.index}})" idx="{{loop.index}}" class="track">{{track.title}}</a></li>
         {% endfor %}
       </ol>
       </div>

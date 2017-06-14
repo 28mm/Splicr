@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 
 from flask import Flask
@@ -58,13 +59,13 @@ def track(uuid=None):
                            ytid=yt_lucky(track.artist + ' ' + track.title))
 
 @app.route('/ytid')
-@app.route('/ytid/<string:terms>')
-def ytid(terms=None):
-    if terms is None:
+@app.route('/ytid/<uuid:uuid>')
+def ytid(uuid=None):
+    if uuid is None:
         return redirect(url_for('index'))
 
-    terms = urllib.parse.unquote(terms)
-    return json.dumps({'ytid' : yt_lucky(terms)})
+    track = Track.get(uuid)
+    return yt_lucky(track.artist + ' ' + track.title)
 
 
 #
