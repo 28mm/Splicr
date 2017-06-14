@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 
 from flask import Flask
@@ -145,10 +144,21 @@ def mb_search(terms):
 
     albums = []
     for release in response_json['releases']:
+        skip = False
         album = {}
         album['score'] = release['score']
         album['title'] = release['title']
         album['uuid']  = release['id']
+        album['artist'] = release['artist-credit'][0]['artist']['name']
+        album['artist_uuid'] = release['artist-credit'][0]['artist']['id']
+        
+        # skip albums we already have, for more presentable search results.
+        for a in albums:
+            if a['artist'] == album['artist'] and a['title'] == album['artist']:
+                skip = True
+        if skip:
+            continue
+
         albums.append(album)
 
     return albums

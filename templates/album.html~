@@ -9,7 +9,8 @@
   <body>
     {% include "navbar.html" %}
 
-    <div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
       <div id="ytplayer"></div>
       
       <script>
@@ -51,6 +52,7 @@
 	        }
 	        else {
 	            play(next());
+                    //player.loadVideoById('XvDZLjaCJuw');
                 }
             }
 	}
@@ -78,29 +80,21 @@
 	                        
 	         }});
              }
-	     $('[status="playing"]').attr('status', 'played')
-	     elt.attr('status', 'playing')
 	     player.loadVideoById(elt.attr('ytid'));
 	     nowPlaying = track;
 	}
 
-      // mark first song as playing.
-      $( function() {
-	    $('a[idx="' + nowPlaying + '"]' ).attr('status', 'playing');
-      });
       </script>
       </div>
     </div>
-    <div class="container">
-      <h3>{{ album.title }}</h3>
-      <table class="splicr"
+    <div class="row">
+    <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+      <h2>{{ album.title }}</h2>
+      <ol>
         {% for track in album.tracks %}
-             <tr>
-	     <td>{{loop.index}}.</td>
-	     <td><a uuid="{{track.uuid}}" ytid="" onclick="play({{loop.index}})" idx="{{loop.index}}" class="track">{{track.title}}</a></li></td>
-             </tr>
-{% endfor %}
-      </table>
+        <li><a uuid="{{track.uuid}}" ytid="" onclick="play({{loop.index}})" idx="{{loop.index}}" class="track">{{track.title}}</a></li>
+        {% endfor %}
+      </ol>
       </div>
     </div><!-- row -->
   </body>

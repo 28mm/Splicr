@@ -1,0 +1,77 @@
+able.splicr td {
+	     padding: 5px;	     
+}
+
+a.navbar-brand {
+	       font-family: "Courier New", Courier, monospace;
+	       font-weight: bold;
+
+	       text-decoration: none;
+	       border-bottom: 2px solid #ef8b80;
+	       box-shadow: inset 0 -4px 0 #ef8b80;
+	       color: inherit;
+	       transition: background 0.1s cubic-bezier(.33,.66,.66,1);
+}
+
+h2, h3, p {
+   font-family: "Courier New", Courier, monospace;
+   font-size: 16px;
+}
+
+p a {
+       text-decoration: none;
+	       border-bottom: 2px solid #ef8b80;
+	       box-shadow: inset 0 -4px 0 #ef8b80;
+	       color: inherit;
+	       transition: background 0.1s cubic-bezier(.33,.66,.66,1);
+
+
+}
+
+p a:hover {
+  		 text-decoration: none;
+		 border-bottom: 2px solid #80e4ef;
+		 box-shadow: inset 0 -4px 0 #80e4ef;
+		 color: inherit;
+		 transition: background 0.1s cubic-bezier(.33,.66,.66,1);
+}
+
+td {
+   font-family: "Courier New", Courier, monospace;
+}
+
+form {
+       font-family: "Courier New", Courier, monospace;
+}
+
+[status="playing"] {
+		 text-decoration: none;
+		 border-bottom: 2px solid #80e4ef;
+		 box-shadow: inset 0 -4px 0 #80e4ef;
+		 color: inherit;
+		 transition: background 0.1s cubic-bezier(.33,.66,.66,1);
+}
+
+
+[status="played"] {
+		 text-decoration: none;
+		 border-bottom: 2px solid #ef8b80;
+		 box-shadow: inset 0 -4px 0 #ef8b80;
+		 color: inherit;
+		 transition: background 0.1s cubic-bezier(.33,.66,.66,1);
+}
+
+
+table.splicr a:hover {
+		 text-decoration: none;
+		 border-bottom: 2px solid #80e4ef;
+		 box-shadow: inset 0 -4px 0 #80e4ef;
+		 color: inherit;
+		 transition: background 0.1s cubic-bezier(.33,.66,.66,1);
+}
+
+.container {
+	max-width: 640px;
+	min-width: 640px;
+	width: 640px;
+}
