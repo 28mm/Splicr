@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Splicr</title>
+
+    {% include "includes.html" %}
+
+  </head>
+  <body>
+    {% include "navbar.html" %}
+
+    <div class="container">
+      <h3>{{ artist.name }}</h3>
+      <table class="splicr"
+        {% for album in artist.albums %}
+             <tr>
+	     <td>{{loop.index}}.</td>
+	     <td><a href="/album/{{album.uuid}}">{{album.title}}</a></li></td>
+             </tr>
+{% endfor %}
+      </table>
+      </div>
+    </div><!-- row -->
+  </body>
+</html>

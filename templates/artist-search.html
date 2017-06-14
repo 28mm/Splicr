@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Splicr</title>
+
+    {% include "includes.html" %}
+
+  </head>
+  <body>
+    {% include "navbar.html" %}
+    <div class="container">
+      <div class="row">
+	
+          <!-- Simple Search Results -->
+          <h3>Artist Results: "{{ terms }}"</h3>
+          <table class="splicr">
+            {% for artist in artists %}
+	    <tr>
+	      <td>{{loop.index}}. <a href="/artist/{{artist.uuid}}">{{artist.name}}</a></td>
+            </tr>
+	    {% endfor %}
+          </table>
+	</div>
+    </div>
+  </body>
+</html>

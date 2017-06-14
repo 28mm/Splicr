@@ -4,10 +4,15 @@
     <div class="navbar-header">
       <a class="navbar-brand" href="/">Splicr</a>
     </div>
-    <form class="navbar-form navbar-right" id="search" onsubmit="return redirect()">
+    <form class="navbar-form navbar-right" id="search" onsubmit="return redirect();">
       <!--<div class="form-group">-->
-        <input type="text" class="form-control" placeholder="Album" autofocus placeholder="Album" name="terms" id="terms">
-        <button type="submit" value="Submit" class="btn btn-default">Search</button>
+      <select class="form-control selectpicker"  data-style="btn-primary"
+	      onChange="$('[name=terms]').attr('placeholder', this.value);" id="search_type">
+	<option>Album</option>
+	<option>Artist</option>
+      </select>
+      <input type="text" class="form-control" placeholder="Album" autofocus placeholder="Album" name="terms" id="terms">
+      <button type="submit" value="Submit" class="btn btn-default">Search</button>
       <!--</div> -->
     </form>
         
@@ -18,7 +23,7 @@
 <script>
   function redirect() {
       window.location.assign(
-            "/search/"
+            '/search/' + $('#search_type').val().toLowerCase() + '/' 
           + encodeURIComponent($("#search :input[id=terms]").val())); 
       return false;
   }
