@@ -4,6 +4,8 @@ from flask import Flask
 from flask import render_template, url_for, redirect
 from flask_uuid import FlaskUUID
 
+from functools import partial
+
 import json
 import urllib
 import sys
@@ -14,19 +16,21 @@ from apiclient.discovery import build
 from apiclient.errors import HttpError
 from oauth2client.tools import argparser
 
+GA_TRACKING_ID = os.environ['GA_TRACKING_ID']
+
+
 DEVELOPER_KEY = os.environ['YOUTUBE_KEY']
 YOUTUBE_API_SERVICE_NAME = "youtube"
 YOUTUBE_API_VERSION = "v3"
 
+render = partial(render_template, GA_TRACKING_ID=GA_TRACKING_ID)
+
 app = Flask(__name__)
 FlaskUUID(app)
 
-#
-# App route definitions. (Entrypoints.)
-
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render('index.html')
 
 @app.route('/search')
 @app.route('/search/<terms>')
@@ -36,7 +40,7 @@ def search(terms=None):
 
     terms = urllib.parse.unquote(terms)
     albums = mb_search(terms)
-    return render_template('search.html', terms=terms, albums=albums)
+    return render('search.html', terms=terms, albums=albums)
 
 @app.route('/album')
 @app.route('/album/<uuid:uuid>')
@@ -45,7 +49,7 @@ def album(uuid=None):
         return redirect(url_for('index'))
 
     album = Album.get(uuid)
-    return render_template('album.html', album=album,
+    return render('album.html', album=album,
                            ytid=yt_lucky(album.artist + ' ' + album.tracks[0].title))
 @app.route('/track')
 @app.route('/track/<uuid:uuid>')
@@ -54,7 +58,7 @@ def track(uuid=None):
         return redirect(url_for('index'))
 
     track = Track.get(uuid)
-    return render_template('track.html', track=track,
+    return render('track.html', track=track,
                            ytid=yt_lucky(track.artist + ' ' + track.title))
 
 @app.route('/ytid')
@@ -66,10 +70,8 @@ def ytid(uuid=None):
     track = Track.get(uuid)
     return yt_lucky(track.artist + ' ' + track.title)
 
-
 #
 # Musicbrainz fns and class definitions
-
 
 class Album:
     '''Musicbrainz Album (release)'''
